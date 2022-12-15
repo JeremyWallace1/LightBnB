@@ -17,7 +17,7 @@ const pool = new Pool({
  */
 const getUserWithEmail = (email) => {
   let queryString = `SELECT * FROM users WHERE email = $1;`;
-  let queryParams = [email];
+  let queryParams = [email.toLowerCase()];
   return pool
     .query(queryString, queryParams)
     .then((result) => {
@@ -64,7 +64,7 @@ exports.getUserWithId = getUserWithId;
 const addUser =  function(userObj) {
   // console.log(userObj);
   let queryString = `INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;`;
-  let queryParams = [userObj.name, userObj.email, userObj.password];
+  let queryParams = [userObj.name, userObj.email.toLowerCase(), userObj.password];
   return pool
     .query(queryString, queryParams)
     .then((result) => {
