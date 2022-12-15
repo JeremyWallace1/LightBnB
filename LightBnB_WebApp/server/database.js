@@ -58,9 +58,8 @@ exports.getUserWithId = getUserWithId;
  * Add a new user to the database.
  */
 const addUser =  function(userObj) {
-  const name = userObj.name;
-  const email = userObj.email;
-  const password = userObj.password;
+  // console.log(userObj);
+  const [name, email, password] = [userObj.name, userObj.email, userObj.password];
   return pool
     .query(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *;`, [name, email, password])
     .then((result) => {
@@ -108,13 +107,12 @@ const getAllReservations = (guestId, limit = 10) => {
     });
 };
 
-
 exports.getAllReservations = getAllReservations;
 
 /// Properties
 
 const getAllProperties = (options, limit = 10) => {
-  console.log(options);
+  // console.log(options);
   const queryParams = [];
   let queryString = `
   SELECT properties.*, AVG(property_reviews.rating) as "average_rating"
@@ -168,7 +166,7 @@ const getAllProperties = (options, limit = 10) => {
   LIMIT $${queryParams.length};
   `;
 
-  console.log(queryString, queryParams);
+  // console.log(queryString, queryParams);
 
   return pool
     .query(queryString, queryParams)
