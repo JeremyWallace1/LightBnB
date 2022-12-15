@@ -10,15 +10,10 @@ const pool = new Pool({
   database: 'lightbnb',
 });
 
-// the following assumes that you named your connection variable `pool`
-// pool.query(`SELECT title FROM properties LIMIT 10;`).then(response => {console.log(response)})
-
 /// Users
 
 /**
  * Get a single user from the database given their email.
- * @param {String} email The email of the user.
- * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithEmail = (email) => {
   return pool
@@ -39,8 +34,6 @@ exports.getUserWithEmail = getUserWithEmail;
 
 /**
  * Get a single user from the database given their id.
- * @param {string} id The id of the user.
- * @return {Promise<{}>} A promise to the user.
  */
 const getUserWithId = (id) => {
   return pool
@@ -63,8 +56,6 @@ exports.getUserWithId = getUserWithId;
 
 /**
  * Add a new user to the database.
- * @param {{name: string, password: string, email: string}} user
- * @return {Promise<{}>} A promise to the user.
  */
 const addUser =  function(userObj) {
   const name = userObj.name;
